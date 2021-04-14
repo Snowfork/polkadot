@@ -941,20 +941,20 @@ pub fn new_full<RuntimeApi, Executor>(
 	// than Rococo and therefore a failure there will be less problematic, this
 	// will be the main testing target for BEEFY for now.
 	if chain_spec.is_westend() || chain_spec.is_rococo() {
-		// let gadget = beefy_gadget::start_beefy_gadget::<_, beefy_primitives::ecdsa::AuthorityPair, _, _, _, _>(
-		// 	client.clone(),
-		// 	keystore_container.sync_keystore(),
-		// 	network.clone(),
-		// 	beefy_link,
-		// 	network.clone(),
-		// 	prometheus_registry.clone()
-		// );
+		 let gadget = beefy_gadget::start_beefy_gadget::<_, beefy_primitives::ecdsa::AuthorityPair, _, _, _, _>(
+		 	client.clone(),
+		 	keystore_container.sync_keystore(),
+		 	network.clone(),
+		 	_beefy_link,
+		 	network.clone(),
+		 	prometheus_registry.clone()
+		 );
 
-		// if chain_spec.is_westend() {
-		// 	task_manager.spawn_essential_handle().spawn_blocking("beefy-gadget", gadget);
-		// } else {
-		// 	task_manager.spawn_handle().spawn_blocking("beefy-gadget", gadget);
-		// }
+		 if chain_spec.is_westend() {
+		 	task_manager.spawn_essential_handle().spawn_blocking("beefy-gadget", gadget);
+		 } else {
+		 	task_manager.spawn_handle().spawn_blocking("beefy-gadget", gadget);
+		 }
 	}
 
 	// if the node isn't actively participating in consensus then it doesn't
